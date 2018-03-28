@@ -1,19 +1,30 @@
 import React from 'react';
 import {View, VrButton, StyleSheet, asset, Model, PointLight, Text} from 'react-vr';
 
+//
 
 export default class Model3D extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            manikinColor: ''
+        };
     }
 
-    changeScene() {
-        console.log("button clicked.");
+    onCursorHover() {
+        this.setState({manikinColor: 'grey'});
+
+        return '<Text style={{fontSize: 0.2, textAlign: \'center\'}}>Blue</Text>';
+    }
+
+    onCursorHoverExit() {
+        this.setState({manikinColor: ''})
     }
 
     render() {
         return (
-            <View>
+            <View onEnter={this.onCursorHover.bind(this)} onExit={this.onCursorHoverExit.bind(this)}>
                 <Model
                     style={{
                         transform: [
@@ -21,11 +32,10 @@ export default class Model3D extends React.Component {
                             {rotateX: this.props.rotateX},
                             {rotateY: this.props.rotateY},
                         ],
+                        color: this.state.manikinColor
                     }}
-                    source={{obj: asset('manikin.obj'),}}
+                    source={{obj: this.props.srcPath }}
                     lit={true}/>
-                <PointLight style={{color: 'white', transform: [{translate: [0, 400, 700]}]}}/>
-
             </View>
         );
     }
