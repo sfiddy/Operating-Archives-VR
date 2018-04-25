@@ -13,7 +13,7 @@ export default class Model3D extends React.Component {
     }
 
     onCursorHover() {
-        this.setState({manikinColor: 'grey'});
+        this.setState({manikinColor: 'gray'});
 
         return '<Text style={{fontSize: 0.2, textAlign: \'center\'}}>Blue</Text>';
     }
@@ -28,14 +28,14 @@ export default class Model3D extends React.Component {
                 <Model
                     style={{
                         transform: [
-                            {translate: [0, -5, -30]},
+                            {translate: this.props.position},
                             {rotateX: this.props.rotateX},
                             {rotateY: this.props.rotateY},
                         ],
                         color: this.state.manikinColor
                     }}
                     source={{obj: this.props.srcPath }}
-                    lit={true}/>
+                    lit={true} />
             </View>
         );
     }
