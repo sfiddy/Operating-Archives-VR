@@ -1,20 +1,27 @@
 import React from 'react';
-import {asset, Text, View, Model, PointLight, VrButton, StyleSheet, Image} from 'react-vr';
+import {asset, Text, View, Model, DirectionalLight, AmbientLight, PointLight, VrButton, StyleSheet, Scene, Image} from 'react-vr';
 import Model3D from './Model/Model3D';
 import RotateButton from './Buttons/RotateButton';
 
-// View Transform
-// transform: [{translate: [-1, 1, -5]}],
-// <View style={{ margin: 1, transform: [{translate: [20, 15, -30]}] }} >
 
-// Segment:
-// Shoes
-// Bracelets
-// Head
+// position 0, -5, -30
 
-// Ask Ed
-// Genie Kim
-// Google Jobs Board jobs.google.com
+// <PointLight style={{color: 'white', transform: [{translate: [0, -5, 30]}]}}/>
+//<PointLight style={{color: 'white', transform: [{translate: [0, 400, 700]}]}}/>
+
+// In Maya
+
+// Change view to Rendering
+// Within rendering tab, assign a material
+// substance designer <-- maya plugin for high quality textures
+
+
+// TODO - Find ivory textures
+
+//
+// <DirectionalLight intensity={2}/>
+
+
 
 
 export default class App extends React.Component {
@@ -22,9 +29,11 @@ export default class App extends React.Component {
         super(props);
 
         this.state = {
+            sceneRotateY: 0,
             xDeg: 0,
             yDeg: 0,
-            hoverText: ' '
+            hoverText: ' ',
+            hoverBody: ' ',
         };
     }
 
@@ -52,42 +61,51 @@ export default class App extends React.Component {
         this.setState({xDeg: 0, yDeg: 0})
     }
 
+    rotateScene() {
+        this.setState({sceneRotateY: 180})
+    }
+
     onCursorHoverExit(){
-        this.setState({hoverText: ' '});
+        this.setState({hoverText: ' ', hoverBody: ' '});
+    }
+
+    scaleUp() {
+
     }
 
     render() {
         return (
             <View>
                 <View>
-                    <PointLight style={{color: 'white', transform: [{translate: [0, 400, 700]}]}}/>
-                    <View onEnter={() => this.setState({hoverText: 'Main Body'})}
+                    <Scene style={{transform: [{rotateY: this.state.sceneRotateY}]}} />
+                    <PointLight decay={2} style={{color: 'white' }}/>
+                    <View onEnter={() => this.setState({hoverText: 'Main Body', hoverBody: 'These dolls were \n commonly used by \n doctors, in particular \n when they were \nexamining patients.'})}
                           onExit={this.onCursorHoverExit.bind(this)}>
-                        <Model3D srcPath={asset('./chinese-manikin/main.obj')} rotateX={this.state.xDeg} rotateY={this.state.yDeg} />
+                        <Model3D srcPath={asset('chinese-manikin/main.obj')} rotateX={this.state.xDeg} rotateY={this.state.yDeg} position={[-8, -5, -30]}/>
                     </View>
-                    <View onEnter={() => this.setState({hoverText: 'Head'})}
+                    <View onEnter={() => this.setState({hoverText: 'Head', hoverBody: 'The Trent Collection \nincludes 3 ivory \nChinese Dolls '})}
                           onExit={this.onCursorHoverExit.bind(this)}>
-                        <Model3D srcPath={asset('./chinese-manikin/head.obj')} rotateX={this.state.xDeg} rotateY={this.state.yDeg} />
+                        <Model3D srcPath={asset('chinese-manikin/head.obj')} rotateX={this.state.xDeg} rotateY={this.state.yDeg} position={[-8, -5, -30]}/>
                     </View>
-                    <View onEnter={() => this.setState({hoverText: 'Bracelets'})}
+                    <View onEnter={() => this.setState({hoverText: 'Bracelets', hoverBody: 'They were known as \nthe doctors lady.'})}
                           onExit={this.onCursorHoverExit.bind(this)}>
-                        <Model3D srcPath={asset('./chinese-manikin/bracelets.obj')} rotateX={this.state.xDeg} rotateY={this.state.yDeg} />
+                        <Model3D srcPath={asset('./chinese-manikin/bracelets.obj')} rotateX={this.state.xDeg} rotateY={this.state.yDeg} position={[-8, -5, -30]}/>
                     </View>
-                    <View onEnter={() => this.setState({hoverText: 'Shoes'})}
+                    <View onEnter={() => this.setState({hoverText: 'Shoes', hoverBody: 'Doctors would ask \n patients to identity the \n site of pain or disease by \n pointing them out \n in the manikin.'})}
                           onExit={this.onCursorHoverExit.bind(this)}>
-                        <Model3D srcPath={asset('./chinese-manikin/shoes.obj')} rotateX={this.state.xDeg} rotateY={this.state.yDeg} />
+                        <Model3D srcPath={asset('./chinese-manikin/shoes.obj')} rotateX={this.state.xDeg} rotateY={this.state.yDeg} position={[-8, -5, -30]}/>
                     </View>
                 </View>
 
-
-                <View style={{ flex: 1, flexDirection: 'row', transform: [{translate: [-1, -1, -5]}] }}>
+                <View style={{ flex: 1, flexDirection: 'column', transform: [{translate: [2.5, 2.5, -5]}] }}>
                     <Text style={{ fontSize: 0.5 }}>{this.state.hoverText}</Text>
+                    <Text style={{ fontSize: 0.25 }}>{this.state.hoverBody}</Text>
                 </View>
 
                 <View style={{
                     flex: 1, flexDirection: 'row',
                     alignItems: 'center', justifyContent: 'center',
-                    transform: [{translate: [20, 15, -30]}],
+                    transform: [{translate: [-30, 15, -30]}],
                 }}>
                     <VrButton onClick={this.rotateUp.bind(this)}>
                         <Image source={require('../static_assets/UI/arrow-up.png')}
@@ -97,7 +115,7 @@ export default class App extends React.Component {
                 <View style={{
                     flex: 1, flexDirection: 'row',
                     alignItems: 'center', justifyContent: 'center',
-                    transform: [{translate: [20, 15, -30]}]
+                    transform: [{translate: [-30, 15, -30]}]
                 }}>
                     <VrButton onClick={this.rotateLeft.bind(this)}>
                         <Image source={require('../static_assets/UI/arrow-left.png')}
@@ -115,11 +133,21 @@ export default class App extends React.Component {
                 <View style={{
                     flex: 1, flexDirection: 'row',
                     alignItems: 'center', justifyContent: 'center',
-                    transform: [{translate: [20, 15, -30]}]
+                    transform: [{translate: [-30, 15, -30]}]
                 }}>
                     <VrButton onClick={this.rotateDown.bind(this)}>
                         <Image source={require('../static_assets/UI/arrow-down.png')}
                                style={{width: 2, height: 2}}/>
+                    </VrButton>
+                </View>
+
+                <View style={{
+                    flex: 1, flexDirection: 'row',
+                    alignItems: 'center', justifyContent: 'center',
+                    transform: [{translate: [20, -5, -30]}]
+                }}>
+                    <VrButton onClick={this.rotateScene.bind(this)}>
+                        <Text style={{ fontSize: 1 }}> next scene </Text>
                     </VrButton>
                 </View>
             </View>
