@@ -12,3 +12,10 @@ Operating Archives VR Demo
 
 ## Future Development
 Add key stroke or button to center scene
+
+
+# Deployment
+Run
+''
+npm run bundle
+''
