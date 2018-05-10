@@ -8,3 +8,7 @@ Operating Archives VR Demo
 
 ## Demo
 ![manikin demo](https://media.giphy.com/media/C955TIF0Eh7ylXBxdb/giphy.gif)
+
+
+## Future Development
+Add key stroke or button to center scene
