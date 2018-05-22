@@ -1,21 +1,36 @@
-Operating Archives VR Demo
-=====================================
+# Operating Archives VR Demo
+This aim of this project was to create an engaging web space that allows users to learn about the history of various [17th century manikins found in Duke University's Rubenstein Library](https://repository.duke.edu/dc/homartifacts?f%5Bformat_facet_sim%5D%5B%5D=manikins+%28teaching+aids%29). Only about 100 manikins have survived and due to their rarity, they are not allowed to be touched by the public. [The VR demo I developed](http://www.stephaniefiddy.com/manikin/index.html) encourages future visitors attending the upcoming exhibit to learn more about the history of these special objects through an interactive demo. The interactive demo consists of a digital rendition of one of the Chinese manikins that informs the viewer about its history through an animated, clickable interface. 
 
-What is Operating Archives? 
---------------------------
-The aim of my contribution to the Operating Archives project was to create an engaging
-web space that allows users to interact with 3D renditions of the 17th century anatomical ivory
-mannequins found in Duke University's Rubenstein Library Trent Collection. These mannequins are highly
-intricate with various movable parts and due to their delicate nature, they are not allowed to be
-touched by the public.2 Because of the manikins’ current inaccessibility, my goal was to make
-these special objects accessible to the community. The means in which I approached this
-challenge is through the creation of 3D printed renditions of the manikins and the furnishment of
-a website that features an 3D-interactive demo of one of the twenty-two mannequins found in the
-Trent Collection. Due to the time constraints present in this project, the website showcasing the
-demo was designed as a proof of concept that was intended to lay the foundation for future
-development. The end product consists of the following: 1) a physically tangible item that
-viewers can touch and 2) a digital rendition that informs the viewer about its history through an
-animated, clickable interface.
+
+## Getting Started
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+
+### Prerequisites 
+This repository has all the node modules included. Please refer to the `package.json` file found in the root folder for a list of dependencies. 
+
+The main dependencies you will need are:
+- [nodeJS](https://nodejs.org/en/)
+- [npm](https://www.npmjs.com/get-npm) 
+
+### Installing
+Before anything, make sure you have downloaded nodeJS and npm. npm is distributed with NodeJS so make sure you have installed NodeJS first. 
+
+You can globally install npm with the following script:
+```
+npm install npm@latest -g
+```
+
+Once you have installed the depencencies, clone/download this repository and go to the project's root folder.
+
+In the root folder install the necessary packages:
+```
+npm install -s
+```
+
+You can then run the project and go to the link detailed in your terminal!
+```
+npm start
+```
 
 
 ## Textured model
